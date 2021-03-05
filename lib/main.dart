@@ -4,13 +4,20 @@ import 'package:flutter/material.dart';
 //   runApp(MyApp());
 // }
 
-void main() => runApp(MyApp(
-      password: '123',
-      userName: 'chandrababu',
-    ));
+void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
-  String userName, password;
+
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return MyAppState();
+  }
+
+}
+class MyAppState extends State<MyApp>{
+
+  var infoText = "this body is built using column widget";
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +30,19 @@ class MyApp extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Text("this body is built using column widget"),
+            Text(infoText),
             RaisedButton(
                 child: Text("this is 1st button"),
                 onPressed: firstButtonPressed),
             RaisedButton(
-                child: Text("this is 2nd button"), onPressed: () => {}),
+                child: Text("this is 2nd button"), onPressed: () =>firstButtonPressed(whichButton: "2nd button pressed") ),
             RaisedButton(
               child: Text("this is 3rd button"),
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  infoText = '3rd button pressed';
+                });
+              },
             ),
             Row(
               children: [Text('this is row inside the column')],
@@ -42,10 +53,11 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  void firstButtonPressed() {}
-
-  MyApp(
-      {String this.userName = 'default username', @required String password}) {
-    this.password = password;
+  void firstButtonPressed({String whichButton}) {
+    setState(() {
+      infoText = whichButton==null?'default first button pressed':whichButton;
+    });
   }
+
+
 }
