@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/text_info.dart';
+import 'package:flutter_app/main_body.dart';
 
 // void main(){
 //   runApp(MyApp());
@@ -28,27 +30,7 @@ class MyAppState extends State<MyApp>{
         appBar: AppBar(
           title: Text("My App"),
         ),
-        body: Column(
-          children: [
-            Text(infoText),
-            RaisedButton(
-                child: Text("this is 1st button"),
-                onPressed: firstButtonPressed),
-            RaisedButton(
-                child: Text("this is 2nd button"), onPressed: () =>firstButtonPressed(whichButton: "2nd button pressed") ),
-            RaisedButton(
-              child: Text("this is 3rd button"),
-              onPressed: () {
-                setState(() {
-                  infoText = '3rd button pressed';
-                });
-              },
-            ),
-            Row(
-              children: [Text('this is row inside the column')],
-            ),
-          ],
-        ),
+        body: MainBody(firstButtonPressed,infoText),
       ),
     );
   }
