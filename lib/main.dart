@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/text_info.dart';
-import 'package:flutter_app/main_body.dart';
+
+import 'custom_button.dart';
 
 // void main(){
 //   runApp(MyApp());
@@ -20,6 +21,7 @@ class MyApp extends StatefulWidget {
 class MyAppState extends State<MyApp>{
 
   var infoText = "this body is built using column widget";
+  var buttonTExts = {"Red", "Green","Blue"};
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +32,20 @@ class MyAppState extends State<MyApp>{
         appBar: AppBar(
           title: Text("My App"),
         ),
-        body: MainBody(firstButtonPressed,infoText),
+        body: Container(width: double.infinity,
+          margin: EdgeInsets.all(10),child: Column(
+            children: [
+              TextInfo(infoText),
+              ...buttonTExts.map((data) { return CustomButton(data,firstButtonPressed);}).toList(),
+            ],
+          ),),
       ),
     );
   }
 
   void firstButtonPressed({String whichButton}) {
     setState(() {
-      infoText = whichButton==null?'default first button pressed':whichButton;
+      infoText = whichButton;
     });
   }
 
